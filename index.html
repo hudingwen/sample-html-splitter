@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>你好，世界！</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.cn/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.cn/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+	<style>
+		 
+
+
+
+		
+	/* 拖拽相关样式 */
+    /*包围div样式*/
+    .box {
+        width: 100%;
+        height: 50vh;
+        overflow: hidden;
+        box-shadow: -1px 9px 10px 3px rgba(0, 0, 0, 0.11);
+    }
+    /*左侧div样式*/
+    .left { 
+        height: 100%;
+        background: #FFFFFF;
+        float: left;
+		width: calc(50% - 5px);   /*左侧初始化宽度*/
+    }
+    /*拖拽区div样式*/
+    .resize {
+        cursor: col-resize;
+        float: left;
+        position: relative;
+        /* top: 45%; */
+        background-color: #d6d6d6;
+        border-radius: 5px;
+        /* margin-top: -10px; */
+        width: 10px; 
+        background-size: cover;
+        background-position: center;
+        /*z-index: 99999;*/
+        font-size: 32px;
+        color: white;
+		height: 100%;
+    }
+    /*拖拽区鼠标悬停样式*/
+    .resize:hover {
+        color: #444444;
+    }
+    /*右侧div'样式*/
+    .mid {
+        float: left;
+        width: calc(50% - 5px);   /*右侧初始化宽度*/
+        height: 100%;
+        background: #fff;
+        box-shadow: -1px 4px 5px 3px rgba(0, 0, 0, 0.11);
+    }
+	.iframeDiv {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1111;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        background: transparent; 
+        /*display: none;*/
+    }
+
+
+
+
+	.mid2 {
+        width: 100%;
+        height: calc(50vh - 85px);
+		background-color: white;
+    }
+	/*包围div样式*/ 
+    /*拖拽区div样式*/
+    .resize2 {
+        cursor: s-resize;
+        background-color: #d6d6d6;
+        border-radius: 5px;
+        height: 10px;
+        background-size: cover;
+        background-position: center;
+        /*z-index: 99999;*/
+        font-size: 32px;
+        color: white;
+		width: 100%;
+    }
+    /*拖拽区鼠标悬停样式*/
+    .resize2:hover {
+        color: #444444;
+    } 
+	.iframeDiv2 {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1111;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        background: transparent;
+        /*display: none;*/
+    }
+
+
+
+
+	
+
+
+
+
+
+ 
+ 
+	</style>
+  </head>
+  <body style="padding: 0px;margin:0px;">
+    <!-- <h1 style="text-align: center;margin-top:5px;">你好，世界！</h1> -->
+
+	<div class="box2" ref="box2">
+		<div class="left2" ref="left2">
+			<!--在此处添加遮罩层-->
+			<div class="iframeDiv2" style="display: none;"></div>
+			<div class="box" ref="box">
+				<div class="left" ref="left">
+					<!--在此处添加遮罩层-->
+					<div class="iframeDiv" style="display: none;"></div>
+					<!-- 左边内容 -->
+					<h4>你好，世界！<button onclick="clickFull('left')">点我全屏/退出</button></h4>
+					<iframe  width="100%" height="100%" frameborder="0" scrolling="auto"
+					src="https://cn.vuejs.org/">
+					</iframe>
+				</div>
+				<div class="resize" ref="resize" title="收缩侧边栏">
+				</div>
+				<div class="mid" ref="mid">
+					<!--在此处添加遮罩层-->
+					<div class="iframeDiv" style="display: none;"></div>
+					<!-- 右边内容 -->
+					<h4>你好，世界！<button onclick="clickFull('mid')">点我全屏/退出</button></h4>
+					<iframe width="100%" height="100%" frameborder="0" scrolling="auto"
+					src="https://cn.vuejs.org/">
+					</iframe>
+				</div>
+			</div>  
+		</div>
+
+		<div class="resize2" ref="resize2" title="收缩侧边栏">
+		</div>
+		<div class="mid2" ref="mid2">
+			<!--在此处添加遮罩层-->
+			<div class="iframeDiv2" style="display: none;"></div>
+			<!-- 右边内容 -->
+			<h4>你好，世界！
+				<button onclick="clickFull('mid2')">点我全屏/退出</button> 
+				<button onclick="clickFull('')">点我整体全屏/退出 </button>
+				<button onclick="test()">点我调用子iframe方法</button>
+			</h4>
+			<iframe  id="child" width="100%" height="100%" frameborder="0" scrolling="auto"
+					
+					src="./child.html">
+			</iframe>
+		</div>
+
+	</div>
+	
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="./js/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="./js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+	<script>
+		
+		var resize = document.getElementsByClassName('resize');
+		var left = document.getElementsByClassName('left');
+		var mid = document.getElementsByClassName('mid');
+		var box = document.getElementsByClassName('box');
+		for (let i = 0; i < resize.length; i++) {
+			// 鼠标按下事件
+			resize[i].onmousedown = function (e) {
+				changeIframeDivStyle('')
+				//颜色改变提醒
+				resize[i].style.background = '#818181';
+				var startX = e.clientX;
+				resize[i].left = resize[i].offsetLeft;
+				// 鼠标拖动事件
+				document.onmousemove = function (e) {
+					var endX = e.clientX;
+					var moveLen = resize[i].left + (endX - startX); // （endx-startx）=移动的距离。resize[i].left+移动的距离=左边区域最后的宽度
+					var maxT = box[i].clientWidth - resize[i].offsetWidth; // 容器宽度 - 左边区域的宽度 = 右边区域的宽度
+
+					// if (moveLen < 32) moveLen = 32; // 左边区域的最小宽度为32px
+					// if (moveLen > maxT - 150) moveLen = maxT - 150; //右边区域最小宽度为150px
+
+					resize[i].style.left = moveLen; // 设置左侧区域的宽度
+
+					for (let j = 0; j < left.length; j++) {
+						left[j].style.width = moveLen + 'px';
+						mid[j].style.width = (box[i].clientWidth - moveLen - 10) + 'px';
+					}
+				};
+				// 鼠标松开事件
+				document.onmouseup = function (evt) {
+					changeIframeDivStyle('none')
+					//颜色恢复
+					resize[i].style.background = '#d6d6d6';
+					document.onmousemove = null;
+					document.onmouseup = null;
+					resize[i].releaseCapture && resize[i].releaseCapture(); //当你不在需要继续获得鼠标消息就要应该调用ReleaseCapture()释放掉
+				};
+				resize[i].setCapture && resize[i].setCapture(); //该函数在属于当前线程的指定窗口里设置鼠标捕获
+				return false;
+			};
+		}
+		function changeIframeDivStyle(display) {
+			var iframeDiv = document.getElementsByClassName('iframeDiv');
+			iframeDiv[0].style.display = display;
+		}
+
+
+
+		var resize2 = document.getElementsByClassName('resize2');
+		var left2 = document.getElementsByClassName('left2');
+		var mid2 = document.getElementsByClassName('mid2');
+		var box2 = document.getElementsByClassName('box2');
+		for (let i = 0; i < resize2.length; i++) {
+			// 鼠标按下事件
+			resize2[i].onmousedown = function (e) {
+				changeIframeDivStyle2('')
+				//颜色改变提醒
+				resize2[i].style.background = '#818181';
+				// var startX = e.clientY;
+				// resize2[i].top = resize2[i].offsetTop;
+				console.log("鼠标按下")
+				// 鼠标拖动事件
+				document.onmousemove = function (e) {
+					box[0].style.height = e.clientY + 'px';
+					mid2[0].style.height = 'calc(100vh - '+(e.clientY + 95)+'px)'
+				};
+				// 鼠标松开事件
+				document.onmouseup = function (evt) {
+					changeIframeDivStyle2('none')
+					//颜色恢复
+					resize2[i].style.background = '#d6d6d6';
+					document.onmousemove = null;
+					document.onmouseup = null;
+					resize2[i].releaseCapture && resize2[i].releaseCapture(); //当你不在需要继续获得鼠标消息就要应该调用ReleaseCapture()释放掉
+					console.log("鼠标松开")
+				};
+				resize2[i].setCapture && resize2[i].setCapture(); //该函数在属于当前线程的指定窗口里设置鼠标捕获
+				return false;
+			};
+		}
+		function changeIframeDivStyle2(display) {
+			var iframeDiv = document.getElementsByClassName('iframeDiv2');
+			iframeDiv[0].style.display = display;
+		}
+        function clickFull(elstr){
+			console.info("elstr",elstr)
+			let el =  document.getElementsByClassName(elstr);
+			if(document.fullscreenElement
+				||document.msFullscreenElement
+				||document.mozFullScreenElement
+				||document.webkitFullscreenElement
+				||false)
+			{
+				console.log("退出全屏")
+				const ele = document;
+				const efs = ele.exitFullscreen || ele.webkitExitFullscreen || ele.mozCancelFullScreen;
+ 
+				if (efs) {
+					efs.call(ele);
+				} else if (typeof window.ActiveXObject !== 'undefined') {
+					const wscript = new ActiveXObject('WScript.Shell');
+					if (wscript) {
+						wscript.SendKeys('{F11}');
+					}
+				}
+			}else{
+				console.log("进入全屏")
+				if(elstr){
+					el[0].requestFullscreen()
+				}else{
+					document.documentElement.requestFullscreen()
+				}
+			}
+		} 
+		function test(){
+			console.log("点击了test方法")
+			const iframeWindow = document.getElementById("child").contentWindow.window.test;
+            iframeWindow('我是父亲');
+		}
+
+	</script>
+  </body>
+</html>
